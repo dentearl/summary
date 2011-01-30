@@ -29,6 +29,7 @@
  *   packages, _American Statistician_, *50*, 361-365.
  *
 THE FOLLOWING TEXT WAS REMOVED FROM THE QUANTILE DOCUMENTATION IN R:
+
 quantile returns estimates of underlying distribution quantiles based on one 
 or two order statistics from the supplied elements in x at probabilities in 
 probs. One of the nine quantile algorithms discussed in Hyndman and Fan 
@@ -73,7 +74,7 @@ This is popular amongst hydrologists.
 Type 6
 m = p. p[k] = k / (n + 1). Thus p[k] = E[F(x[k])]. This is used by Minitab 
 and by SPSS.
-Type 7
+Type 7 [ the default ]
 m = 1-p. p[k] = (k - 1) / (n - 1). In this case, p[k] = mode[F(x[k])]. 
 This is used by S.
 Type 8
