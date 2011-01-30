@@ -19,7 +19,7 @@
  *  http://www.gnu.org/licenses/gpl-2.0.html
  *
  *  Thanks and credit are due to Ivan Frohne and Rob J Hyndman
- *  who wrote summary() in R.
+ *  who wrote quantile() in R.
  *  References:
  *
  *   Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) _The New S
@@ -138,7 +138,7 @@ void help(void){
            "  along with this program; if not, a copy is available at\n"
            "  http://www.gnu.org/licenses/gpl-2.0.html\n\n"
            "  Thanks and credit are due to Ivan Frohne and Rob J Hyndman\n"
-           "  who wrote summary() in R.\n"
+           "  who wrote quantile() in R.\n"
            "  References:\n\n"
            "   Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) _The New S\n"
            "   Language_.  Wadsworth & Brooks/Cole.\n\n"
@@ -154,13 +154,6 @@ void help(void){
            "   --precision [0..9] adjusts the number of decimals. The default is 4.\n"
            "   --type [1..9] selects one of the nine quantile algorithms. The default is 7. For\n"
            "                 more information, Inside of R try  ?stats::quantile to see details.\n\n"
-           "  Thanks and credit are due to Ivan Frohne and Rob J Hyndman\n"
-           "  who wrote summary() in R.\n"
-           "  References:\n\n"
-           "   Becker, R. A., Chambers, J. M. and Wilks, A. R. (1988) _The New S\n"
-           "   Language_.  Wadsworth & Brooks/Cole.\n\n"
-           "   Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical\n"
-           "   packages, _American Statistician_, *50*, 361-365.\n\n"
            );
    exit(0);
 }
