@@ -15,7 +15,7 @@ License
 summary software is provided under the GNU GPL version 2.
 
 Example
-[dearl@machine demo]$ cat testData.txt  | summary
+[dearl@machine demo]$ cat testData.txt | summary
         n       Min.    1st Qu.     Median       Mean    3rd Qu.       Max.     Stdev.
       100    -3.0166    -0.6717    -0.0531    -0.0974     0.5544     2.0199     0.9752
 
@@ -39,7 +39,7 @@ Details
   along with this program; if not, a copy is available at
   http://www.gnu.org/licenses/gpl-2.0.html
 
-  Thanks and credit are due to Ivan Frohne and Rob J Hyndman
+  Thanks and credit are owed to Ivan Frohne and Rob J Hyndman
   who wrote quantile() in R.
   References:
 
