@@ -1,5 +1,5 @@
 /*
- *  summary : an R like five number summary
+ *  summary : an R like "five" number summary
  *  
  * February 2011
  * dent earl, dearl (a) soe ucsc edu
@@ -98,8 +98,8 @@ type 8. The default method is type 7, as used by S and by R < 2.0.0.
 
 int debug_flag;
 int verbose_flag;
-float my_version_number = 0.1;
-char *my_version_date = "1 February 2011";
+char *my_version_number = "0.1.1";
+char *my_version_date = "21 March 2011";
 
 struct doubleList {
    double d;
@@ -108,7 +108,7 @@ struct doubleList {
 typedef struct doubleList doubleList;
 
 void version(void){
-   printf("summary version %.1lf, %s.\n", my_version_number, my_version_date);
+   printf("summary version %s, %s.\n", my_version_number, my_version_date );
    exit(0);
 }
 
@@ -124,7 +124,8 @@ void memError(void){
 
 void help(void){
    printf( "  summary an R-like five number (plus two) summary.\n"
-           "  February 2011\n"
+           "  Version %s\n"
+           "  %s\n"
            "    dent earl, dearl (a) soe ucsc edu\n\n"
            "  This program is free software; you can redistribute it and/or modify\n"
            "  it under the terms of the GNU General Public License as published by\n"
@@ -153,7 +154,8 @@ void help(void){
            "  OPTIONS\n"
            "   --precision [0..9] adjusts the number of decimals. The default is 4.\n"
            "   --type [1..9] selects one of the nine quantile algorithms. The default is 7. For\n"
-           "                 more information, inside of R try  ?stats::quantile to see details.\n\n"
+           "                 more information, inside of R try  ?stats::quantile to see details.\n\n",
+           my_version_number, my_version_date
            );
    exit(0);
 }
@@ -436,25 +438,41 @@ double quantile( double *x, int n, double p, int type){
 }
 
 double sampStdev( double *x, int n, double ave){
-   double s=0;
+   double s=0.0;
    int i;
-   if (n < 2)
+   if ( n < 2 )
       return -1.0;
-   for (i = 0; i < n; ++i)
-      s += pow( ( x[i] - ave ), 2);
+   for ( i = 0; i < n; ++i )
+      s += pow( ( x[i] - ave ), 2 );
    s /= ( n - 1 );
    return sqrt( s );
 }
 
+double sum( double *x, int n ){
+   double a = 0.0;
+   int i;
+   for ( i = 0; i < n; ++i )
+      a += x[ i ];
+   return a;
+}
+
 void summarize( double *x, int n, double ave, int prec, int type ){
+   double stdev = 0.0;
+   char stdevStr[32];
+   int ret;
+   stdev = sampStdev( x, n, ave );
+   if ( stdev > -1.0 )
+      ret = sprintf( stdevStr, "%9.*f", prec, stdev );
+   else
+      ret = sprintf( stdevStr, "%s", "NA" );
    qsort( x, n, sizeof(double), dbl_cmp );
-   printf( "%9s  %9s  %9s  %9s  %9s  %9s  %9s  %9s\n", 
+   printf( "%9s  %9s  %9s  %9s  %9s  %9s  %9s  %9s  %9s\n", 
            "n", "Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", 
-           "Max.", "Stdev." );
-   printf( "%9d  %9.*f  %9.*f  %9.*f  %9.*f  %9.*f  %9.*f  %9.*f\n", 
-           n, prec, x[0], prec, quantile( x, n, 0.25, type ), prec, median(x, n, 0),
+           "Max.", "Stdev.", "Sum" );
+   printf( "%9d  %9.*f  %9.*f  %9.*f  %9.*f  %9.*f  %9.*f  %9s  %9.*f\n", 
+           n, prec, x[0], prec, quantile( x, n, 0.25, type ), prec, median( x, n, 0 ),
            prec, ave, prec, quantile( x, n, 0.75, type ), 
-           prec, x[n-1], prec, sampStdev(x, n, ave) );
+           prec, x[n-1], stdevStr, prec, sum( x, n ) );
 }
 
 int main (int argc, char **argv)
