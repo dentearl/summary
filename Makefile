@@ -2,9 +2,13 @@ SHELL:=/bin/bash
 
 all: bin/summary
 
-bin/summary: src/summary.c
-	mkdir -p bin
-	gcc $^ -o $@.tmp -lm
+src/%.o: src/%.c
+	gcc -g -Wall -c $<
+	mv $(notdir $*.o) $@
+
+bin/summary: src/summary.c src/dStruct.o
+	mkdir -p $(dir $@)
+	gcc $^ -o $@.tmp -Wall -lm -ggdb
 	mv $@.tmp $@
 
 archive: summary.tar.gz 

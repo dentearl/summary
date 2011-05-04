@@ -95,17 +95,12 @@ type 8. The default method is type 7, as used by S and by R < 2.0.0.
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include "dStruct.h"
 
 int debug_flag;
 int verbose_flag;
 char *my_version_number = "0.1.1";
 char *my_version_date = "21 March 2011";
-
-struct doubleList {
-   double d;
-   struct doubleList *next;
-};
-typedef struct doubleList doubleList;
 
 void version(void){
    printf("summary version %s, %s.\n", my_version_number, my_version_date );
@@ -205,60 +200,6 @@ void gatherOptions(int argc, char **argv, int *prec, int *type )
       }
    if ((*prec < 0) || (*prec > 9 ) || (*type < 1) || (*type > 9))
       usage();
-}
-
-void initList(doubleList *dl){
-   dl = (doubleList *)malloc(sizeof(doubleList));
-   if (dl == NULL)
-      memError();
-   dl -> d = 0.0;
-   dl -> next = NULL;
-}
-
-void addToList(doubleList **dl, double data){
-   doubleList *p;
-   p = (doubleList *)malloc(sizeof(doubleList));
-   if (p==NULL)
-      memError();
-   p -> d = data;
-   p -> next = *dl;
-   *dl = p;
-}
-
-int countList(doubleList *dl){
-   if (dl == NULL)
-      return 0;
-   else
-      return (1+countList(dl->next));
-}
-
-void releaseList(doubleList *dl){
-   if (dl != NULL){
-      releaseList(dl->next);
-      free(dl);
-   }
-}
-
-double * listToArray(doubleList *dl, int n){
-   int i;
-   double *a = NULL;
-   doubleList *p;
-   a = calloc(n, sizeof(double));
-   if ( a == NULL )
-      memError();
-   p = dl;
-   for( i=0; i < n; i++ ){
-      a[i] = p->d;
-      p = p->next;
-   }
-   return a;
-}
-
-void printList(doubleList *dl){
-   if (dl != NULL){
-      printf("%lf%s", dl->d, (dl->next == NULL)?"\n":", " );
-      printList(dl->next);
-   }
 }
 
 int dbl_cmp(const void *a, const void *b){
