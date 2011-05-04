@@ -99,8 +99,8 @@ type 8. The default method is type 7, as used by S and by R < 2.0.0.
 
 int debug_flag;
 int verbose_flag;
-char *my_version_number = "0.1.1";
-char *my_version_date = "21 March 2011";
+char *my_version_number = "0.1.2";
+char *my_version_date = "4 May 2011";
 
 void version(void){
    printf("summary version %s, %s.\n", my_version_number, my_version_date );
