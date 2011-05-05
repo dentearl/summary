@@ -150,9 +150,9 @@ void help(void){
            "  OPTIONS\n"
            "   --precision [0..9] adjusts the number of decimals. The default is 4.\n"
            "   --type [1..9] selects one of the nine quantile algorithms. The default is 7. For\n"
-           "                 more information, inside of R try  ?stats::quantile to see details.\n\n"
+           "                 more information, inside of R try  ?stats::quantile to see details.\n"
            "   --sorted  use this flag if your data is already sorted in assending order to\n"
-           "             get a speedup.",
+           "             get a speedup.\n\n",
            my_version_number, my_version_date
            );
    exit(EXIT_SUCCESS);
