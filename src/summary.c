@@ -397,7 +397,7 @@ double sum( double *x, int n ){
    double a = 0.0;
    int i;
    for ( i = 0; i < n; ++i )
-      a += x[ i ];
+      a += x[i];
    return a;
 }
 
