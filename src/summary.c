@@ -97,6 +97,7 @@ type 8. The default method is type 7, as used by S and by R < 2.0.0.
 #include <getopt.h>
 #include "dStruct.h"
 
+int sorted_flag;
 int debug_flag;
 int verbose_flag;
 char *my_version_number = "0.1.2";
@@ -104,17 +105,17 @@ char *my_version_date = "4 May 2011";
 
 void version(void){
    printf("summary version %s, %s.\n", my_version_number, my_version_date );
-   exit(0);
+   exit(EXIT_SUCCESS);
 }
 
 void usage(void){
-   fprintf(stderr, "USAGE: summary takes input via stdin, one number per line. --precision [0..9] --type [1..9]\n\n");
+   fprintf(stderr, "USAGE: summary takes input via stdin, one number per line. \n--precision [0..9] --type [1..9] --sorted if your data is sorted in ascending order.\n\n");
    exit(2);
 }
 
 void memError(void){
    fprintf(stderr, "Error, unable to allocate memory. Exiting.\n");
-   exit(2);
+   exit(EXIT_FAILURE);
 }
 
 void help(void){
@@ -140,7 +141,7 @@ void help(void){
            "   Language_.  Wadsworth & Brooks/Cole.\n\n"
            "   Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical\n"
            "   packages, _American Statistician_, *50*, 361-365.\n\n"
-           "  USAGE:\n"
+           "  Usage:\n"
            "   $ echo -e '112\\n98.1\\n101\\n' | summary\n"
            "        n       Min.    1st Qu.     Median       Mean    3rd Qu.       Max.     Stdev.\n"
            "        3    98.1000    99.5500   101.0000   103.7000   106.5000   112.0000     7.3328\n\n"
@@ -149,10 +150,12 @@ void help(void){
            "  OPTIONS\n"
            "   --precision [0..9] adjusts the number of decimals. The default is 4.\n"
            "   --type [1..9] selects one of the nine quantile algorithms. The default is 7. For\n"
-           "                 more information, inside of R try  ?stats::quantile to see details.\n\n",
+           "                 more information, inside of R try  ?stats::quantile to see details.\n\n"
+           "   --sorted  use this flag if your data is already sorted in assending order to\n"
+           "             get a speedup.",
            my_version_number, my_version_date
            );
-   exit(0);
+   exit(EXIT_SUCCESS);
 }
 void gatherOptions(int argc, char **argv, int *prec, int *type )
 {
@@ -163,6 +166,7 @@ void gatherOptions(int argc, char **argv, int *prec, int *type )
             {
                {"debug", no_argument, &debug_flag, 1},
                {"verbose", no_argument, &verbose_flag, 1},
+               {"sorted", no_argument, &sorted_flag, 1},
                {"help", no_argument, 0, 'h'},
                {"version", no_argument, 0, 'v'},
                {"precision", required_argument, 0, 'p'},
@@ -398,6 +402,7 @@ double sum( double *x, int n ){
 }
 
 void summarize( double *x, int n, double ave, int prec, int type ){
+   extern int sorted_flag;
    double stdev = 0.0;
    char stdevStr[32];
    int ret;
@@ -406,7 +411,8 @@ void summarize( double *x, int n, double ave, int prec, int type ){
       ret = sprintf( stdevStr, "%9.*f", prec, stdev );
    else
       ret = sprintf( stdevStr, "%s", "NA" );
-   qsort( x, n, sizeof(double), dbl_cmp );
+   if (!sorted_flag)
+      qsort( x, n, sizeof(double), dbl_cmp );
    printf( "%9s  %9s  %9s  %9s  %9s  %9s  %9s  %9s  %9s\n", 
            "n", "Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", 
            "Max.", "Stdev.", "Sum" );
