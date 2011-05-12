@@ -1,5 +1,5 @@
 summary
-21 March 2011
+4 May 2011
 Dent Earl, dearl@soe.ucsc.edu
 BME Dept, School of Engineering, UCSC
 
@@ -22,8 +22,8 @@ Example
 Details
 [dearl@machine demo]$ summary --help
   summary an R-like five number (plus two) summary.
-  Version 0.1.1
-  21 March 2011
+  Version 0.1.3
+  4 May 2011
     dent earl, dearl (a) soe ucsc edu
 
   This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,7 @@ Details
   along with this program; if not, a copy is available at
   http://www.gnu.org/licenses/gpl-2.0.html
 
-  Thanks and credit are owed to Ivan Frohne and Rob J Hyndman
+  Thanks and credit are due to Ivan Frohne and Rob J Hyndman
   who wrote quantile() in R.
   References:
 
@@ -50,7 +50,7 @@ Details
    Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical
    packages, _American Statistician_, *50*, 361-365.
 
-  USAGE:
+  Usage:
    $ echo -e '112\n98.1\n101\n' | summary
         n       Min.    1st Qu.     Median       Mean    3rd Qu.       Max.     Stdev.
         3    98.1000    99.5500   101.0000   103.7000   106.5000   112.0000     7.3328
@@ -59,6 +59,8 @@ Details
   blank lines.  
 
   OPTIONS
-   --precision [0..9] adjusts the number of decimals. Default is 4.
-   --type [1..9] selects one of the nine quantile algorithms. Default is 7, inside of R
-                 try ?stats::quantile to see details.
+   --precision [0..9] adjusts the number of decimals. The default is 4.
+   --type [1..9] selects one of the nine quantile algorithms. The default is 7. For
+                 more information, inside of R try  ?stats::quantile to see details.
+   --sorted  use this flag if your data is already sorted in assending order to
+             get a speedup.
