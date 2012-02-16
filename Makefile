@@ -22,4 +22,4 @@ summary.tar.gz: src/summary.c src/dStruct.c src/dStruct.h COPYING Makefile READM
 	tar -cvzf summary.tar.gz COPYING Makefile README.md src/summary.c src/dStruct.c src/dStruct.h 
 
 clean:
-	rm -rf bin/ summary.tar.gz
+	rm -rf bin/ src/*.o summary.tar.gz
