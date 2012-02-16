@@ -441,5 +441,5 @@ int main (int argc, char **argv) {
     releaseList(list);
     summarize(array, n, ave, prec, type);
     free(array);
-    return 0;
+    return EXIT_SUCCESS;
 }
