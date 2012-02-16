@@ -59,7 +59,7 @@ summary software is provided under the GNU GPL version 2.
             n       Min.    1st Qu.     Median       Mean    3rd Qu.       Max.     Stdev.
             3    98.1000    99.5500   101.0000   103.7000   106.5000   112.0000     7.3328
 
-      stdin: one number on each line of input, no puntuation, text or
+      stdin: one number on each line of input, no punctuation, text or
       blank lines.  
 
       OPTIONS
