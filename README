@@ -6,7 +6,7 @@ BME Dept, School of Engineering, UCSC
 " summary() from the R project, now on the command line. "
 
 summary is a C program for getting the five number summary 
-(plus sample side and standard deviation) on the command line 
+(plus sample size and standard deviation) on the command line 
 (see wikipedia:Five-number summary). It is a partial 
 refactoring of the R quantile() function from the R project 
 and as such is offered here under GPL 2.
