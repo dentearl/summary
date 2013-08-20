@@ -8,15 +8,15 @@ BME Dept, School of Engineering, UCSC
 
 
 ## Description
-" summary() from the R project, now on the command line. "
+" `summary()` from the `R` project, now on the command line. "
 
-summary is a C program for getting the [five number summary](http://en.wikipedia.org/wiki/Five-number_summary) 
+`summary` is a C program for getting the [five number summary](http://en.wikipedia.org/wiki/Five-number_summary) 
 (plus sample size and standard deviation) on the command line. 
-It is a partial refactoring of the R quantile() function from the R project 
+It is a partial refactoring of the `R` `quantile()` function from the `R` project 
 and as such is offered here under GPL 2.
 
 ## License
-summary software is provided under the GNU GPL version 2.
+`summary` software is provided under the GNU GPL version 2.
 
 ## Example
     [dearl@machine demo]$ cat testData.txt | summary
